@@ -1,0 +1,17 @@
+version: '4'
+
+services:
+  postgres:
+    image: postgres:15.7
+    restart: unless-stopped
+    container_name: postgresql-order-service
+    environment:
+      POSTGRES_PASSWORD: admin
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  postgres_data:
